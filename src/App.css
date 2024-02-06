@@ -74,6 +74,97 @@ header {
   padding: 20px;
 }
 
-header .header_text{
+header .header_text {
   font-size: 25px;
+}
+
+/* DiaryList */
+
+.menu_wrapper {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.controlMenu {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  cursor: pointer;
+  font-family: "Nanum Pen Script";
+  font-size: 18px;
+}
+.right_col {
+  flex-grow: 1; /*속성이 남는 행 여백을 분배해서 채움*/
+}
+
+.right_col button {
+  width: 100%;
+}
+
+/* DiaryItem img*/
+.diaryItem {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.diaryItem .emotionImg {
+  min-width: 120px;
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.diaryItem .emotionImg_1 {
+  background-color: #64c964;
+}
+
+.diaryItem .emotionImg_2 {
+  background-color: #9dd77e;
+}
+
+.diaryItem .emotionImg_3 {
+  background-color: #fdce17;
+}
+
+.diaryItem .emotionImg_4 {
+  background-color: #fd8446;
+}
+
+.diaryItem .emotionImg_5 {
+  background-color: #fd565f;
+}
+
+.diaryItem .emotionImg img {
+  width: 70%;
+}
+
+/* DiaryItem content*/
+.itemcontent {
+  margin-left: 20px;
+  flex-grow: 1;
+  cursor: pointer;
+
+}
+
+.diarydate{
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.diarycontent{
+ font-size: 18px;
+}
+
+.editbtn{
+  min-width: 70px;
 }

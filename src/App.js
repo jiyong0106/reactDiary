@@ -57,7 +57,7 @@ const dummyData = [
   {
     id: 3,
     emotion: 3,
-    content: "오늘은 세번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+    content: "오늘은 세번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요asdfdsafsdffsafdsasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     date: 1706959139637,
   },
   {

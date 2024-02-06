@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { MyButton } from "./MyButton";
+import { useNavigate } from "react-router-dom";
+import DiaryItem from "./DiaryItem";
 
 const sortOptions = [
   {
-    value: "ordest",
+    value: "latest",
     name: "최신순",
   },
   {
@@ -12,9 +15,28 @@ const sortOptions = [
   },
 ];
 
+const filteroption = [
+  {
+    value: "all",
+    name: "전체보기",
+  },
+  {
+    value: "happy",
+    name: "좋은 감정",
+  },
+  {
+    value: "bad",
+    name: "나쁜 감정",
+  },
+];
+
 const ControlMenu = ({ value, onChange, optionList }) => {
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)}>
+    <select
+      className="controlMenu"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
       {optionList.map((item, idx) => (
         <option key={idx} value={item.value}>
           {item.name}
@@ -26,19 +48,60 @@ const ControlMenu = ({ value, onChange, optionList }) => {
 
 const DiaryList = ({ diaryList }) => {
   const [sortType, setSortType] = useState("latest");
+  const [filterEmotion, setFilterEmotion] = useState("all");
+  const navigate = useNavigate();
+
+  const getProcessdDiaryList = () => {
+    const filterCallback = (item) => {
+      if (filterEmotion === "happy") {
+        return parseInt(item.emotion) <= 3;
+      } else {
+        return parseInt(item.emotion) > 3;
+      }
+    };
+
+    const compare = (a, b) => {
+      // compare함수를 만들어서 sort함수에 넣어서 정렬을 할 수 있다.
+      if (sortType === "latest") {
+        return parseInt(b.date) - parseInt(a.date); // 최근에 작성한게 앞에 오도록 정렬
+      } else {
+        return parseInt(a.date) - parseInt(b.date);
+      }
+    };
+    const copyList = JSON.parse(JSON.stringify(diaryList)); // 배열을 json화 시켜서 문자열로 바꿈 그리고 다시 json화 시켜서 배열로 바꿈
+    const filterList =
+      filterEmotion === "all"
+        ? copyList
+        : copyList.filter((item) => filterCallback(item));
+    const sortedList = filterList.sort(compare); // compare함수를 통해 정렬
+    return sortedList;
+  };
 
   return (
-    <div>
-      <ControlMenu
-        value={sortType}
-        onChange={setSortType}
-        optionList={sortOptions}
-      />
-      {diaryList.map((item) => (
-        <div key={item.id}>
-          <div>{item.content}</div>
-          <div>{item.emotion}</div>
+    <div className="DiatyList">
+      <div className="menu_wrapper">
+        <div className="left_col">
+          <ControlMenu
+            value={sortType}
+            onChange={setSortType}
+            optionList={sortOptions}
+          />
+          <ControlMenu
+            value={filterEmotion}
+            onChange={setFilterEmotion}
+            optionList={filteroption}
+          />
         </div>
+        <div className="right_col">
+          <MyButton
+            text={"새 일기쓰기"}
+            type={"positive"}
+            onClick={() => navigate("/new")}
+          />
+        </div>
+      </div>
+      {getProcessdDiaryList().map((item) => (
+        <DiaryItem key = {item.id}{...item}/>
       ))}
     </div>
   );
