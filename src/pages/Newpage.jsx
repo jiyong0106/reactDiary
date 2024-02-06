@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
+
+import { DiaryEditer } from "../components/DiaryEditer";
 
 export const Newpage = () => {
-  return (
-    <div>Newpage</div>
-  )
-}
+  return <DiaryEditer />;
+};

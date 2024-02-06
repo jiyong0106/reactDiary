@@ -35,7 +35,6 @@ export const HomePage = () => {
 
 
   useEffect(() => {
-    console.log(data);
   }, [data]);
 
   const increaseMonth = () => {
