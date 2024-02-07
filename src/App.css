@@ -214,3 +214,48 @@ header .header_text {
 .emotionItem span {
   font-size: 18px;
 }
+
+.emotionItemOff{
+  background-color: #ececec;
+}
+
+.emotionItemOn_1 {
+  background-color: #64c964;
+}
+
+.emotionItemOn_2 {
+  background-color: #9dd77e;
+}
+
+.emotionItemOn_3 {
+  background-color: #fdce17;
+}
+
+.emotionItemOn_4 {
+  background-color: #fd8446;
+}
+
+.emotionItemOn_5 {
+  background-color: #fd565f;
+}
+
+/* newpage-textarea */
+
+textarea{
+ box-sizing: border-box;
+ width: 100%;
+ min-height: 250px;
+ background-color: #ececec;
+ border: none;
+ border-radius: 5px;
+ resize: none;
+ font-family: "Yeon Sung", system-ui;
+ font-size: 20px;
+ padding: 10px 20px;
+}
+
+.buttonBox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}

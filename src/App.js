@@ -119,9 +119,9 @@ function App() {
           <div className="App">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/diary" element={<DiaryPage />} />
+              <Route path="/diary/:id" element={<DiaryPage />} />
               <Route path="/new" element={<Newpage />} />
-              <Route path="/edit" element={<EditPage />} />
+              <Route path="/edit/:id" element={<EditPage />} />
             </Routes>
           </div>
         </Router>
@@ -132,8 +132,3 @@ function App() {
 
 export default App;
 
-/* <img src={process.env.PUBLIC_URL + "assets/emotion1.png"} alt="logo" />
-<img src={process.env.PUBLIC_URL + "assets/emotion2.png"} alt="logo" />
-<img src={process.env.PUBLIC_URL + "assets/emotion3.png"} alt="logo" />
-<img src={process.env.PUBLIC_URL + "assets/emotion4.png"} alt="logo" />
-<img src={process.env.PUBLIC_URL + "assets/emotion5.png"} alt="logo" /> */
