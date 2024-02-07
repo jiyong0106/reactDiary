@@ -42,13 +42,12 @@ const getstringDate = (date) => {
 };
 
 export const DiaryEditer = ({ isEdit, originData }) => {
+  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
   const contentRef = useRef();
   const [emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getstringDate(new Date()));
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
-
   const handleClickEmote = (emotion) => {
     setEmotion(emotion);
   };
@@ -71,9 +70,9 @@ export const DiaryEditer = ({ isEdit, originData }) => {
         onCreate(date, content, emotion);
       } else {
         onEdit(originData.id, date, content, emotion);
+        console.log(originData.id, date, content, emotion)
       }
     }
-
     navigate("/", { replace: true });
   };
 
