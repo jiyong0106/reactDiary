@@ -19,9 +19,10 @@ export const EditPage = () => {
       } else {
         alert("해당 일기가 없습니다.");
         navigate("/", { replace: true }); //replace: true 를 사용하면 뒤로가기 했을 때 이전 페이지로 이동하지 않는다.
-      }
+      }console.log(targetDiary)
     }
   }, [id, diaryList]);
+  
 
   return (
     <div>

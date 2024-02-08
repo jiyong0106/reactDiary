@@ -41,40 +41,40 @@ const reducer = (state, action) => {
 export const DiaryContext = React.createContext(); // context를 생성한다.
 export const DiaryDispatchContext = React.createContext(); // context를 생성한다. // 최적화 문제가 생기지 않도록 dispatch를 따로 관리한다.
 
-const dummyData = [
-  {
-    id: 1,
-    emotion: 1,
-    content: "오늘은 첫번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-    date: 1706959139635,
-  },
-  {
-    id: 2,
-    emotion: 2,
-    content: "오늘은 두번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-    date: 1706959139636,
-  },
-  {
-    id: 3,
-    emotion: 3,
-    content: "오늘은 세번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-    date: 1706959139637,
-  },
-  {
-    id: 4,
-    emotion: 4,
-    content: "오늘은 네번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-    date: 1706959139638,
-  },{
-    id: 5,
-    emotion: 5,
-    content: "오늘은 다섯번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-    date: 1706959139639,
-  },
-];
+// const dummyData = [
+//   {
+//     id: 1,
+//     emotion: 1,
+//     content: "오늘은 첫번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+//     date: 1706959139635,
+//   },
+//   {
+//     id: 2,
+//     emotion: 2,
+//     content: "오늘은 두번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+//     date: 1706959139636,
+//   },
+//   {
+//     id: 3,
+//     emotion: 3,
+//     content: "오늘은 세번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+//     date: 1706959139637,
+//   },
+//   {
+//     id: 4,
+//     emotion: 4,
+//     content: "오늘은 네번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+//     date: 1706959139638,
+//   },{
+//     id: 5,
+//     emotion: 5,
+//     content: "오늘은 다섯번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
+//     date: 1706959139639,
+//   },
+// ];
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyData); // useReducer를 사용하여 state와 dispatch를 생성한다. data는 일기장의 데이터를 저장한다.
+  const [data, dispatch] = useReducer(reducer, []); // useReducer를 사용하여 state와 dispatch를 생성한다. data는 일기장의 데이터를 저장한다.
 
   const dataId = useRef(0); // data의 id값을 관리하기 위한 useRef
 
@@ -111,8 +111,12 @@ function App() {
         emotion,
       },
     });
-    
   };
+
+  const setStorage = () => {
+    localStorage.setItem("diraryId", JSON.stringify(dataId.current));
+  }
+
   return (
     <DiaryContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={{ onCreate, onEdit, onRemove }}>
@@ -135,3 +139,6 @@ export default App;
 
 
 //DiaryEditer 수정하기 구현x
+//더미데이터 삭제
+//로컬스토리로 저장해서 새로고침해도 데이터가 날라가지 않게 구현하기
+//삭제하기구현하기

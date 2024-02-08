@@ -26,6 +26,7 @@ export const DiaryEditer = ({ isEdit, originData }) => {
     navigate(-1);
   };
 
+
   const handleSubmit = () => {
     if (content.length < 1) {
       contentRef.current.focus();
@@ -36,11 +37,11 @@ export const DiaryEditer = ({ isEdit, originData }) => {
         isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?"
       )
     ) {
-      if (!isEdit) {
+      if (!isEdit) { //isEdit는 수정인지 새로운 일기인지 구분하기 위한 변수
         onCreate(date, content, emotion);
+        localStorage.setItem('diaryId', '1번' ) //
       } else {
-        onEdit(originData.id, date, content, emotion);
-        console.log(originData.id, date, content, emotion);
+        onEdit(originData.id, date, content, emotion); //originData.id 는
       }
     }
     navigate("/", { replace: true });

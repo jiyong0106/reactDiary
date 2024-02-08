@@ -24,7 +24,11 @@ export const HomePage = () => {
     const lastDay = new Date(
       curDate.getFullYear(),
       curDate.getMonth() + 1,
-      0
+      0,
+      23,
+      59,
+      59
+      //마지막날의 23시 59분 59초  이래야 31일이 생김
     ).getTime();
 
     setData(
