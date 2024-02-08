@@ -259,3 +259,51 @@ textarea{
   justify-content: space-between;
   margin-top: 50px;
 }
+
+/*DiaryPage*/
+
+.DiaryPageMain section{
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.DiaryPageMain h4{
+  font-size: 20px;
+}
+
+.DiaryPage_imgBox{
+  width: 35%;
+  border-radius: 5px;
+}
+
+.DiaryPage_imgBox p{
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 25px;
+}
+
+.DiaryPage_imgBox_1{
+  background-color: #64c964;
+}
+
+.DiaryPage_imgBox_2{
+  background-color: #9dd77e;
+}
+
+.DiaryPage_imgBox_3{
+  background-color: #fdce17;
+}
+
+.DiaryPage_imgBox_4{
+  background-color: #fd8446;
+}
+
+.DiaryPage_imgBox_5{
+  background-color: #fd565f;
+}
