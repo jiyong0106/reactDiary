@@ -11,7 +11,7 @@ const env = process.env;
 env.PUBLIC_URL = env.PUBLIC_URL || "";
 
 export const DiaryEditer = ({ isEdit, originData }) => {
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
   const contentRef = useRef();
   const [emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getstringDate(new Date()));
@@ -39,16 +39,23 @@ export const DiaryEditer = ({ isEdit, originData }) => {
     ) {
       if (!isEdit) { //isEdit는 수정인지 새로운 일기인지 구분하기 위한 변수
         onCreate(date, content, emotion);
-        localStorage.setItem('diaryId', '1번' ) //
+         //
       } else {
-        onEdit(originData.id, date, content, emotion); //originData.id 는
+        onEdit(originData.id, date, content, emotion)
       }
     }
     navigate("/", { replace: true });
   };
 
+  const handleRemove = () => {
+    if(window.confirm("정말 삭제하시나요?")){
+      onRemove(originData.id);
+      navigate("/", { replace: true });
+    }
+  }
+
   useEffect(() => {
-    if (isEdit) {
+    if (isEdit) { 
       setDate(getstringDate(new Date(parseInt(originData.date))));
       setEmotion(originData.emotion);
       setContent(originData.content);
@@ -60,6 +67,9 @@ export const DiaryEditer = ({ isEdit, originData }) => {
       <MyHeader
         headerText={isEdit ? "일기 수정하기" : "새로운 일기"}
         leftChild={<MyButton text={"< 뒤로가기"} onClick={backSiteClick} />}
+        rightChild={
+          isEdit &&
+          <MyButton text={"삭제하기"} type ={'negative'}onClick={handleRemove} />}
       />
       <div>
         <section>

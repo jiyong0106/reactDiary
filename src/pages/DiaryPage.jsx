@@ -39,7 +39,6 @@ export const DiaryPage = () => {
     return <div className="DiaryPage">로딩중...</div>;
   } else {
     const currentEmotion = emotionList.find((it) => it.emotion_id === data.emotion)
-    console.log(currentEmotion)
     return (
       <div>
         <MyHeader

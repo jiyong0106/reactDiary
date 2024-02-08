@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { MyButton } from "./MyButton";
 import { useNavigate } from "react-router-dom";
 import DiaryItem from "./DiaryItem";
@@ -30,7 +30,7 @@ const filteroption = [
   },
 ];
 
-const ControlMenu = ({ value, onChange, optionList }) => {
+const ControlMenu = React.memo(({ value, onChange, optionList }) => {
   return (
     <select
       className="controlMenu"
@@ -44,7 +44,7 @@ const ControlMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-};
+});
 
 const DiaryList = ({ diaryList }) => {
   const [sortType, setSortType] = useState("latest");
@@ -101,7 +101,7 @@ const DiaryList = ({ diaryList }) => {
         </div>
       </div>
       {getProcessdDiaryList().map((item) => (
-        <DiaryItem key = {item.id}{...item}/>
+        <DiaryItem key={item.id} {...item} />
       ))}
     </div>
   );
@@ -109,3 +109,10 @@ const DiaryList = ({ diaryList }) => {
 export default DiaryList;
 
 //주석추가
+//const handleSetFilter = (filter)=>{
+//   setFilter(filter)
+// }
+
+//컴포넌트가 리렌더링 될때 다시 생성이됨 -> react.memo에서 비교를 했을 때 다른 prop이라 간주해서 리렌더링이 됨
+//하지만 useState에서 반환받은 상태변함수들은 동일한 id를 보장함, 그래서 리렌더링이 되지 않음
+//상태변화 자체를 내려주면 편하게 상태변화 할 수 있다. 

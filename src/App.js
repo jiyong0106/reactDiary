@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useRef, useReducer } from "react";
+import React, { useRef, useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { DiaryPage } from "./pages/DiaryPage";
@@ -9,8 +9,8 @@ import { EditPage } from "./pages/EditPage";
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
-    case "INIT": {
-      return action.data;
+    case "INIT": { // init는 초기화를 의미한다.
+      return action.data; // action.data는 diaryList를 전달한다.
     }
     case "CREATE": {
       const newItem = {
@@ -35,47 +35,15 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  localStorage.setItem("dirayId", JSON.stringify(newState));
   return newState; // newState를 반환한다.
 };
 
 export const DiaryContext = React.createContext(); // context를 생성한다.
 export const DiaryDispatchContext = React.createContext(); // context를 생성한다. // 최적화 문제가 생기지 않도록 dispatch를 따로 관리한다.
 
-// const dummyData = [
-//   {
-//     id: 1,
-//     emotion: 1,
-//     content: "오늘은 첫번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-//     date: 1706959139635,
-//   },
-//   {
-//     id: 2,
-//     emotion: 2,
-//     content: "오늘은 두번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-//     date: 1706959139636,
-//   },
-//   {
-//     id: 3,
-//     emotion: 3,
-//     content: "오늘은 세번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-//     date: 1706959139637,
-//   },
-//   {
-//     id: 4,
-//     emotion: 4,
-//     content: "오늘은 네번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-//     date: 1706959139638,
-//   },{
-//     id: 5,
-//     emotion: 5,
-//     content: "오늘은 다섯번째로 기분이 좋아서 기분이 좋은 일기를 쓰고 싶어요",
-//     date: 1706959139639,
-//   },
-// ];
-
 function App() {
   const [data, dispatch] = useReducer(reducer, []); // useReducer를 사용하여 state와 dispatch를 생성한다. data는 일기장의 데이터를 저장한다.
-
   const dataId = useRef(0); // data의 id값을 관리하기 위한 useRef
 
   //CREATE
@@ -113,9 +81,15 @@ function App() {
     });
   };
 
-  const setStorage = () => {
-    localStorage.setItem("diraryId", JSON.stringify(dataId.current));
-  }
+  useEffect(() => {
+    const localData = localStorage.getItem("dirayId");
+    if(localData){
+      const diaryList = JSON.parse(localData).sort((a,b) => parseInt(b.id) - parseInt(a.id));
+      dataId.current = parseInt(diaryList[0].id) + 1;
+      dispatch({ type: "INIT", data: diaryList });
+      // type은 INIT이고 data는 diaryList를 전달한다.
+    }
+  }, []);
 
   return (
     <DiaryContext.Provider value={data}>
@@ -137,8 +111,9 @@ function App() {
 
 export default App;
 
-
 //DiaryEditer 수정하기 구현x
 //더미데이터 삭제
 //로컬스토리로 저장해서 새로고침해도 데이터가 날라가지 않게 구현하기
 //삭제하기구현하기
+
+//객체는 JSON.stringify로 문자열로 바꾸고 JSON.parse로 객체로 바꿀 수 있다.
